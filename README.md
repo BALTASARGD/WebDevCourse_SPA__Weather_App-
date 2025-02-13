@@ -63,6 +63,3 @@ This is a weather application that allows users to check the weather of a given 
 4️⃣ The weather details are **displayed dynamically**.  
 5️⃣ The background updates based on the **current weather condition**.  
 
----
-
-This summary provides a structured **Markdown** representation of your code, making it easier to understand! 🚀 Let me know if you need modifications. 😊
