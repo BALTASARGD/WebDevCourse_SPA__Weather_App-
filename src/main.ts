@@ -85,3 +85,52 @@ function displayInvalidCityMessage(isValidCity: boolean) {
     spanEl!.classList.remove("hidden");
   }
 }
+
+// Funciones para la obtención de datos del clima
+
+async function getCityWeatherData(city: string) {
+  console.log("🔄 Fetching new data for:", city);
+
+  try {
+    const cityCoords = await getCityLatandLon(city);
+    if (!cityCoords) throw new Error("❌ Coordenadas no encontradas");
+
+    const { lat, lon } = cityCoords;
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+    );
+
+    if (!response.ok) throw new Error("❌ Ciudad no encontrada");
+
+    const data = await response.json();
+    localStorage.setItem(city, JSON.stringify({ timestamp: Date.now(), data }));
+
+    console.log("✅ Datos obtenidos");
+    displayWeatherData(data);
+  } catch (error) {
+    if (error instanceof Error) {
+      displa// Funciones para la obtención de datos del clima
+
+      async function getCityWeatherData(city: string) {
+        console.log("🔄 Fetching new data for:", city);
+      
+        try {
+          const cityCoords = await getCityLatandLon(city);
+          if (!cityCoords) throw new Error("❌ Coordenadas no encontradas");
+      
+          const { lat, lon } = cityCoords;
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+          );
+      
+          if (!response.ok) throw new Error("❌ Ciudad no encontrada");
+      
+          const data = await response.json();
+          localStoyErrorMessage(error.message);
+    } else {
+      displayErrorMessage("An unknown error occurred");
+    }
+  } finally {
+    hideLoader();
+  }
+}
