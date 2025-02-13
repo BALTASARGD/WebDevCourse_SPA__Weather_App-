@@ -2,146 +2,70 @@
 @tailwind utilities;
 @tailwind utilities;
 
-/* Estilos generales */
+/* General Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    flex-direction: column;
-    background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
-  }
-  
-  .app-container {
-    max-width: 900px;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .app-container:hover {
-    transform: scale(1.02);
-  }
-  
-  .app-title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #2c3e50;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-  }
-  
-  /* Estilo del formulario */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+.app-container {
+  max-width: 800px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.search-input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #3498db;
+}
+.search-button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.forecast-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 0px;
+  margin-top: 20px;
+}
+.forecast-item {
+  background: rgba(173, 46, 46, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 100px;
+}
+@media (max-width: 600px) {
   .search-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+    flex-direction: column;
   }
-  
-  .search-input {
-    padding: 10px 15px;
-    font-size: 1.2rem;
-    border-radius: 30px;
-    border: 2px solid #3498db;
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    margin-right: 10px;
+  .forecast-container {
+    flex-wrap: nowrap;
   }
-  
-  .search-input:focus {
-    border-color: #1d84b5;
-    box-shadow: 0 0 8px rgba(29, 132, 181, 0.6);
-  }
-  
-  .search-button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #3498db;
-    color: #fff;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .search-button:hover {
-    background-color: #2980b9;
-  }
-  
-  /* Estilo de los resultados */
-  .weather-data-container {
-    display: none;
-    margin-top: 20px;
-  }
-  
-  .weather-data-container.active {
-    display: block;
-  }
-  
-  .weather-data-container h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-  
-  .weather-data-container .temp {
-    font-size: 3rem;
-    font-weight: 700;
-    margin: 10px 0;
-  }
-  
-  .weather-data-container img {
-    width: 80px;
-    height: 80px;
-  }
-  
-  .weather-data-container .details {
-    margin-top: 20px;
-    font-size: 1.2rem;
-  }
-  
-  .weather-data-container .forecast {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .weather-data-container .forecast div {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .weather-data-container .forecast img {
-    width: 40px;
-    height: 40px;
-  }
-  
-  /* Error message */
-  .error-message {
-    color: #e74c3c;
-    font-size: 1.2rem;
-    margin-top: 20px;
-  }
-  
-  .error-message.hidden {
-    display: none;
-  }
-  
+}
