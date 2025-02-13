@@ -1,24 +1,21 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+// Constantes
+const API_KEY = "e7c373a53439ea9e7f81f7e9ac0bd075";
+const CACHE_EXPIRATION = 5 * 60 * 1000; // 5 minutos en milisegundos
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+// Elementos del DOM
+const loader = document.createElement("div");
+const formEl = document.querySelector("form");
+const spanEl = document.querySelector("span");
+const weatherContainer = document.createElement("div");
+const errorContainer = document.createElement("p");
+
+// Configuración del loader
+loader.classList.add("hidden", "animate-spin", "border-4", "border-blue-500", "border-t-transparent", "rounded-full", "w-8", "h-8", "mx-auto");
+errorContainer.classList.add("text-red-500", "hidden", "mt-3");
+weatherContainer.classList.add("mt-5", "p-4", "border", "rounded-lg");
+
+// Añadir los elementos al body
+document.body.appendChild(weatherContainer);
+document.body.appendChild(errorContainer);
