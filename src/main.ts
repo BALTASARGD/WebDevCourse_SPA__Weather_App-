@@ -61,3 +61,27 @@ function showLoader() {
 function hideLoader() {
   loader.classList.add("hidden");
 }
+
+// Funciones para la validación y sanitización de la ciudad
+
+function getCity(event: Event) {
+  const formData = new FormData(event.target as HTMLFormElement);
+  const formInputs = Object.fromEntries(formData.entries());
+  return formInputs.city;
+}
+
+function sanitizeCity(cityValue: string) {
+  return cityValue.trim().toLowerCase();
+}
+
+function isCityValid(cityValueSanitized: string) {
+  return cityValueSanitized.length >= 2 && cityValueSanitized.length <= 100;
+}
+
+function displayInvalidCityMessage(isValidCity: boolean) {
+  if (!isValidCity) {
+    spanEl!.textContent = "Invalid";
+    spanEl!.classList.add("text-red-500");
+    spanEl!.classList.remove("hidden");
+  }
+}
