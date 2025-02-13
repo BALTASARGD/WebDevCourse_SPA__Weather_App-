@@ -52,3 +52,12 @@ function searchCityWeather(event: Event) {
   spanEl?.classList.add("hidden");
   showLoader();
 }
+
+// Funciones para manejar el loader
+function showLoader() {
+  loader.classList.remove("hidden");
+}
+
+function hideLoader() {
+  loader.classList.add("hidden");
+}
