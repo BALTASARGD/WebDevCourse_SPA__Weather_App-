@@ -165,7 +165,7 @@ function displayWeatherData(data: any) {
     <div class="mt-5 text-white">
       <p><strong>Humidity:</strong> ${data.list[0].main.humidity}%</p>
       <p><strong>Speed:</strong> ${data.list[0].wind.speed} m/s</p>
-      <p><strong>Pressure:</strong> ${data.list[0].main.pressure} hPa</p>
+      <p><strong>Pressure:</strong> ${data.list[0].main.pressure} hPa</p>/**/
     </div>
     
     <!-- Pronóstico de 5 días -->

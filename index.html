@@ -1,13 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css">
+    <title>Weather App</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app" class="app-container">
+      <h1 class="app-title">Weather App</h1>
+      <form class="search-form">
+        <input
+          id="city"
+          name="city"
+          type="text"
+          class="search-input"
+          placeholder="Enter city name"
+        />
+        <button type="submit" class="search-button">Search</button>
+      </form>
+      <div id="weather-data" class="weather-data-container">
+        <!-- Weather Data will go here -->
+      </div>
+      <p id="error-message" class="error-message hidden">City not found or invalid city name</p>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
