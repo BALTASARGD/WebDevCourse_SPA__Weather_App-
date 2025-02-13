@@ -66,4 +66,4 @@ Esta es una aplicación de clima que permite a los usuarios consultar el clima d
 
 ---
 
-Este resumen en **Markdown** organiza tu código de forma clara y fácil de entender. 🚀 ¡Avísame si necesitas ajustes! 😊
+
