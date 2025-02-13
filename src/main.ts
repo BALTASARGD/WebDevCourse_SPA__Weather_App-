@@ -134,3 +134,23 @@ async function getCityWeatherData(city: string) {
     hideLoader();
   }
 }
+// Obtener las coordenadas de la ciudad
+async function getCityLatandLon(city: string) {
+  const geoResponse = await fetch(
+    `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`
+  );
+  
+  if (!geoResponse.ok) {
+    console.error("Error en la solicitud:", geoResponse.statusText);
+    return null;
+  }
+
+  const geoData = await geoResponse.json();
+  
+  if (!geoData || geoData.length === 0) {
+    console.error("Ciudad no encontrada en la API de geolocalización.");
+    return null;
+  }
+
+  return { lat: geoData[0].lat, lon: geoData[0].lon };
+}
