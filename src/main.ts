@@ -109,24 +109,7 @@ async function getCityWeatherData(city: string) {
     displayWeatherData(data);
   } catch (error) {
     if (error instanceof Error) {
-      displa// Funciones para la obtención de datos del clima
-
-      async function getCityWeatherData(city: string) {
-        console.log("🔄 Fetching new data for:", city);
-      
-        try {
-          const cityCoords = await getCityLatandLon(city);
-          if (!cityCoords) throw new Error("❌ Coordenadas no encontradas");
-      
-          const { lat, lon } = cityCoords;
-          const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
-          );
-      
-          if (!response.ok) throw new Error("❌ Ciudad no encontrada");
-      
-          const data = await response.json();
-          localStoyErrorMessage(error.message);
+      displayErrorMessage(error.message);
     } else {
       displayErrorMessage("An unknown error occurred");
     }
@@ -134,6 +117,7 @@ async function getCityWeatherData(city: string) {
     hideLoader();
   }
 }
+
 // Obtener las coordenadas de la ciudad
 async function getCityLatandLon(city: string) {
   const geoResponse = await fetch(
@@ -153,4 +137,70 @@ async function getCityLatandLon(city: string) {
   }
 
   return { lat: geoData[0].lat, lon: geoData[0].lon };
+}
+// Funciones para mostrar datos y errores
+
+function displayWeatherData(data: any) {
+  const weatherCondition = data.list[0].weather[0].main.toLowerCase(); // Soleado, Nublado, Lluvia
+  const image = getWeatherImage(weatherCondition);
+  
+  document.body.style.backgroundImage = `url('images/${image}')`; // Cambiar fondo
+  document.body.style.backgroundSize = 'cover';
+  document.body.style.backgroundPosition = 'center center';
+  document.body.style.height = '100vh';
+  document.body.style.margin = '0';
+
+  const cityName = data.city.name;
+  const icon = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`;
+
+  weatherContainer.innerHTML = `
+    <h2 class="text-3xl font-bold text-white">${cityName}</h2>
+    <div class="flex justify-center items-center mt-2">
+      <img src="${icon}" alt="Weather icon" class="w-24 h-24" />
+      <p class="text-3xl font-semibold text-white">${(data.list[0].main.temp - 273.15).toFixed(1)}°C</p>
+    </div>
+    <p class="mt-2 text-lg text-white">${data.list[0].weather[0].description}</p>
+    
+    <!-- Detalles del clima -->
+    <div class="mt-5 text-white">
+      <p><strong>Humidity:</strong> ${data.list[0].main.humidity}%</p>
+      <p><strong>Speed:</strong> ${data.list[0].wind.speed} m/s</p>
+      <p><strong>Pressure:</strong> ${data.list[0].main.pressure} hPa</p>
+    </div>
+    
+    <!-- Pronóstico de 5 días -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-5">
+      ${data.list.slice(0, 5).map((forecast: any) => {
+        const date = new Date(forecast.dt * 1000).toLocaleDateString();
+        const temp = (forecast.main.temp - 273.15).toFixed(1);
+        const icon = `https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png`;
+        return `
+          <div class="bg-white p-4 rounded-lg shadow-lg">
+            <p class="text-lg font-semibold">${date}</p>
+            <img src="${icon}" alt="Icon" class="w-16 h-16 mx-auto" />
+            <p class="text-center">${temp}°C</p>
+            <p class="text-center text-sm">${forecast.weather[0].description}</p>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function displayErrorMessage(message: string) {
+  errorContainer.textContent = message;
+  errorContainer.classList.remove("hidden");
+}
+
+function getWeatherImage(weatherCondition: string) {
+  const weatherImages: { [key: string]: string } = {
+    clear: "soleado.jpeg",
+    rain: "lluvioso.jpeg",
+    clouds: "nublado.jpeg",
+    snow: "nieve.jpeg",
+    thunderstorm: "tormenta.jpeg"
+  };
+
+  // Si el clima no está en el mapa, usa una imagen por defecto
+  return weatherImages[weatherCondition] || "default.jpg";
 }
