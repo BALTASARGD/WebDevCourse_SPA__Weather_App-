@@ -8,24 +8,14 @@
     <link rel="stylesheet" href="./src/style.css">
     <title>Weather App</title>
   </head>
-  <body>
+    <body>
     <div id="app" class="app-container">
       <h1 class="app-title">Weather App</h1>
       <form class="search-form">
-        <input
-          id="city"
-          name="city"
-          type="text"
-          class="search-input"
-          placeholder="Enter city name"
-        />
+        <input id="city" name="city" type="text" class="search-input" placeholder="Enter city name" />
         <button type="submit" class="search-button">Search</button>
       </form>
-      <div id="weather-data" class="weather-data-container">
-        <!-- Weather Data will go here -->
-      </div>
-      <p id="error-message" class="error-message hidden">City not found or invalid city name</p>
-    </div>
+      
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
