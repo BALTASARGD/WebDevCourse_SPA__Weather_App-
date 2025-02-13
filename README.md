@@ -1,1 +1,1 @@
-# WebDevCourse_SPA__Weather_App-
+# WebDevCours SPA Weather_App-
